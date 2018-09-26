@@ -1,0 +1,326 @@
+\documentclass[10pt]{amsart}
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[russian]{babel}
+\usepackage[shortlabels]{enumitem} 
+\usepackage{amsxtra, upgreek}
+\usepackage{enumitem, fancyref, theoremref}
+\usepackage{amsmath, amssymb, amsthm, thmtools}
+\usepackage{amsrefs, latexsym,pstricks, mathtext}
+\usepackage{hyperref, caption, tikz, bbm}
+\usepackage{algorithm2e}
+\usepackage{graphicx}
+\graphicspath{{pictures/}}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+\usepackage[left=0mm, top=0mm, right=0mm, bottom=0mm, nohead, nofoot]{geometry}
+
+\textwidth=42pc
+\calclayout
+
+%===============================================================================
+
+% Title settings for Russian language in amsart
+
+%===============================================================================
+
+\makeatletter
+\def\@settitle{\begin{center}%
+    \baselineskip14\p@\relax
+    \bfseries\scshape
+    \@title
+  \end{center}%
+}
+\makeatother
+
+%===============================================================================
+
+% Defined commands
+
+%===============================================================================
+
+\newcommand{\BR}{\mathbb{R}} %real numbers
+\newcommand{\BN}{\mathbb{N}} %natural numbers
+\newcommand{\BZ}{\mathbb{Z}} %integer numbers
+\newcommand{\BZp}{\BZ_{\geqslant 0}} %nonnegative integers
+\newcommand{\BC}{\mathbb{C}} %complex numbers
+\newcommand{\qet}[1]{| #1 \rangle} %qet vector notation
+\newcommand{\braqet}[2]{\langle #1 | #2 \rangle} %braqet
+\newcommand{\triqet}[3]{\langle #1 | #2 | #3 \rangle} %triqet
+\newcommand{\pst}[1]{\underline{#1}} %particle included in spaces
+\newcommand{\BP}{\mathbb{P}} %probability
+\newcommand{\const}{\mathrm{const}} %constant
+\newcommand{\vspan}[1]{\mathrm{span}\{ #1 \}} %span
+\newcommand{\ceiling}[1]{\lceil #1 \rceil} %ceiling
+\newcommand{\floor}[1]{\lfloor #1 \rfloor} %floor
+\newcommand{\Alg}{\mathrm{Alg}} %algorithm
+\newcommand{\row}{\mathrm{row}} %row
+\newcommand{\eps}{\varepsilon} %eps
+\newcommand{\Ss}{\Sigma^*} %all words
+\newcommand{\Einheit}{\mathbbm{1}} %characteristic function
+\newcommand{\RAMS}[4]{\big< #1, \{#2_i\}, \{#3_i\}, \{#4_i\} \big>} %RAM state
+
+%===============================================================================
+
+% Theorem styles
+
+%===============================================================================
+
+\theoremstyle{plain}
+\newtheorem*{quest}{Вопрос}
+\newtheorem{prop}{Утверждение}
+\newtheorem{theorem}{Теорема}[section]
+\newtheorem{hypoth}{Гипотеза}
+\newtheorem{lemma}{Лемма}[section]
+
+\theoremstyle{remark}
+\newtheorem{conseq}{Вывод}
+\newtheorem{rem}{Замечание}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Определение}
+
+\newtheoremstyle{problem}
+  {\topsep}   % ABOVESPACE
+  {\topsep}   % BELOWSPACE
+  {\normalfont}  % BODYFONT
+  {0pt}       % INDENT
+  {\bfseries} % HEADFONT
+  {.}         % HEADPUNCT
+  {5pt plus 1pt minus 1pt} % HEADSPACE
+  {}          % CUSTOM-HEAD-SPEC
+\newtheorem{problem}{Задача}
+\newenvironment{theorem}[2][Теорема]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Задача]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{reflection}[2][Reflection]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{proposition}[2][Proposition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+ 
+ 
+\def\eps{\varepsilon}
+\def\T{{\cal T}}
+\def\H{{\cal H}}
+\def\F{{\cal F}}
+\def\K{{\cal K}}
+\def\L{{\cal L}}
+\def\F{{\cal F}}
+\def\Q{{\cal Q}}
+\def\N{{\cal N}}
+\def\p{{\cal P}}
+\def\np{{\cal NP}}
+\def\A{{\cal A}}
+\def\B{{\cal B}}
+\def\D{{\cal D}}
+\def\BB{{\cal B}^* }
+\def\DD{{\cal D}^* }
+\def\TT{\tilde{\cal T}}
+\def\f{\tilde f}
+\def\ind{\mathop{\rm index}}
+\def\St{\mathop{\rm St}}
+\let\bd\partial
+\def\V{\ensuremath{{\cal V}}}
+\def\SS{{\mathbb S}}
+\def\RR{\mathbb R}
+\def\QQ{\mathbb Q}
+\def\PP{\mathbb P}
+\def\R{\cal R}
+\def\NN{\mathbb N}
+\def\CC{\mathbb C}
+\def\ZZ{\mathbb Z}
+\def\FF{\mathbb F}
+\def\s{\sigma}
+\def\S{\Sigma }
+\def\ss{\Sigma^* }
+\def\ra{\rightarrow}
+\def\da{\downarrow}
+\def\Ra{\Rightarrow}
+\def\t{\theta}
+\def\l{\lambda}
+
+\begin{document}
+    \textup{Филиппова Анастасия}
+
+\begin{center}
+
+    \large\textbf{Домашнее задание 7}
+    
+
+\end{center}
+\begin{enumerate}
+\item \textbf{Предложите алгоритм.}\\
+Будем решать данную систему методом последовательных подстановок: решаем систему, подставляя $x = r_1 + a_1y, y\in \ZZ$ во второе уравнение. Получаем, $r_1 + a_1y\equiv r_2~mod~a_2$, получим $ y = z + a_2h,$, где $h \in \ZZ$. Получаем, $x = r_1 + a_1(z + a_2h)$. Подставляем полученное значение в следующее уравнение, и так далее. Продолжаем, пока не дойдем до последнего уравнения. Так как все переходы равносильные, алгоритм корректен. Следовательно , получаем верный ответ: $x = t~mod~\text{НОK}(a_1,a_2,\text{...},a_n)$. Если же на каком-то шаге уравнение не будет иметь решений, то система будет не совместна.
+\item
+\begin{enumerate} 
+\item 
+ \textbf{ Найдите все целые числа $n$ такие, что $n$ дает остаток $7$ при делении на $9$, остаток $3$ при делении на $4$ и остаток $16$ при делении на $17$.}\\
+   Решим систему сравнений:\\
+\begin{cases}
+    x & \equiv $~~~~7$ \pmod{$9$} \\
+    x & \equiv $~~3$ \pmod{$4$} \\
+    x & \equiv $~~17$ \pmod{$17$}, \\
+\end{cases}\\
+Будем искать $x$ в виде: $x = x_1 + 4x_2 + 36x_3$ (по алгориму Гарнера).\\
+$x_1 \equiv 3 ~mod~4 \rightarrow x_1 = 3.\\
+3 + 4x_2 \equiv 7 ~mod~9 \Leftrightarrow 4x_2 \equiv 4 ~mod~9 \Leftrightarrow x_2 \equiv 4\cdot 7 \equiv 1~mod~9\Rightarrow x_2 = 1.\\
+7 + 36x_3 \equiv 16 ~mod~17 \Leftrightarrow 36x_3 \equiv 9~mod~ 17\Leftrightarrow 2x_3 \equiv 9~mod~17 \Leftrightarrow x_3 \equiv 9\cdot 9 \equiv 81 \equiv 13 \Rightarrow x = 3 + 4 + 36\cdot 13 = 475$\\
+Ответ:457.
+    \item \textbf{Найдите все целые числа $n$ такие, что $n$ дает остаток $35$ при делении на $49$, остаток $27$ при делении на $50$ и остаток $49$ при делении на $56$.}\\
+    Решим систему сравнений, по алгоритму, описанному в 1-ой задаче:\\
+    \begin{cases}
+    $x$ & \equiv $35$ \pmod{$49$} \\
+    $x$ & \equiv $27$ \pmod{$50$} \\
+    $x$ & \equiv $49$ \pmod{$56$}, \\
+\end{cases}\\
+$x = 35 + 49y, y\in Z\\
+35+49y \equiv 27~mod~50\\
+-1y\equiv -8\equiv 41~mod~50\\
+y \equiv -8\cdot 49 \equiv 8 ~mod~50\Rightarrow y = 8 + 50z\\
+x = 35 +49(8 + 50z) = 427 + 2450z$\\
+Подставим в 3 сравнение: $ 427 + 2450z \equiv 49 ~mod~56 \Rightarrow 42y \equiv 14 ~mod~56\Rightarrow 3z \equiv 1~mod~4\Rightarrow z \equiv 3~mod~4$\\
+Следовательно, $y = 3 + 4c$, тогда $x = 427 +2450\cdot 3 + 9800c\Rightarrow x = 7777$\\
+Ответ: 7777.
+    \end{enumerate}
+    \item \textbf{Существует ли элемент, обратный к $x$, в кольце  $\RR[x]/(x^4+1)$?}\\
+    Да: $-x^3 \in \RR[x]/(x^4+1) , (-x^3)\cdot(x) = -x^4 = 1$ в $\RR[x]/(x^4+1)$.
+    \item \textbf{Решите уравнение $x^3f(x) = 1+x$ в кольце $\QQ[x]/(x^4+1)$.}\\
+    $x^4 + 1$ - неприводим в кольце многочленов с коэффиентами из $\QQ\Rightarrow\QQ[x]/(x^4+1)$ - поле, то есть евклидово кольцо, то есть есть аналог алгоритма Евклида:\\
+    $x^3f(x) + g(x)(x^4 + 1) = 1 + x\\
+    (x^3, x^4 + 1) = (1, x^3) = 1, 1 | (1 + x) \Rightarrow$ решения есть.\\
+    $x^3f'(x) + (x^4 + 1)g'(x) = 1\\
+    f'(x) = -x, g'(x) = 1 \Rightarrow f(x) = -x^2 -x + ax^3 + bx^2 + cx + d$, где $a, b, c , d\in \QQ$\newpage
+    \item \textbf{Являются ли неприводимыми многочлены:}
+\begin{enumerate}
+    \item  $x^2-3x+11\in \FF_{37}[x]$\\
+Посмотрим на дискрименант : $D = 9 - 44 = -35 = 2, 2^{\frac{37 - 1}{2}} = 2^{18} = 262144 = -1\Rightarrow 2$ - квадратичный не вычет по модулю 37, следовательно, дискрименант не является квадратом, то есть корней у этого многочлена в поле нет, а для многочлена степени меньшей либо равной 3 это эквивалентно неприводимости.\\
+Ответ: неприводим.
+\item $x^3-x+2\in \FF_5[x]$\\
+$0 : 0 - 0 + 2 = 2$;\\
+$1 : 1 - 1 + 2 = 2$;\\
+$2 : 8 - 2 + 2 = 3;\\
+3 : 27 - 3 + 2 = 1;\\
+4 : 64 - 4 + 2 = 2\Rightarrow $корней нет, то есть неприводим.\\
+Ответ: неприводим.
+\item $x^4+1\in \FF_{11}[x]$\\
+Пусть многочлен имеет корни, тогда $\exists x\hookrightarrow (x^2)^2 = -1\Rightarrow$ -1 - квадратичный вычет по модулю $11$, но $(-1)^{\frac{11 - 1}{2}} = (-1)^5 = -1 ~mod~5\Rightarrow $ получили противоречие. То есть у многочлена не корней.\\
+Посмотрим, может ли он раскладываться в произведение неприводимых второй степени:\\
+$(x^4 + 1) = (x^2 +ax + b)(x^2 + cx + d) = x^4 + x^3 (c + a) + x^2 (d + b + ac) + x (ad + bc) + bd;$ получаем систему сравнений:\\
+\begin{cases}
+    a & \equiv -c \pmod{$11$} \\
+    d + b + ac & \equiv $~~0$ \pmod{$11$} \\
+    ad + bc & \equiv $~~0$ \pmod{$11$}, \\
+    bd & \equiv $~~1$ \pmod{$11$}, \\
+\end{cases}$\Rightarrow$ 
+\begin{cases}
+    a & \equiv -c \pmod{$11$} \\
+    d + b + ac & \equiv $~~0$ \pmod{$11$} \\
+    c(b - d) & \equiv $~~0$ \pmod{$11$}, \\
+    bd & \equiv $~~1$ \pmod{$11$}, \\
+\end{cases}\\
+Рассмотрим 2 варианта: \\1) $c \equiv 0 ~mod ~11\Rightarrow b \equiv -d ~mod~11 \Rightarrow b^2 \equiv -1 ~mod~ 11\Rightarrow$ получили противоречие, так как ранее доказали, что -1 не является квадратичным вычетом по модулю 11.\\
+2) $ b = d \Rightarrow $ \begin{cases}
+    a & \equiv -c \pmod{$11$} \\
+     a^2 & \equiv 2b \pmod{$11$} \\
+    b^2 & \equiv $~~1$ \pmod{$11$}, \\
+\end{cases}\\
+Первый случай: $b = -1$, тогда $a^2 = -2 = 9\Rightarrow a = -3, c = 3$, получаем:\\
+$(x^4 + 1) = (x^2 -3x - 1)(x^2 +3x - 1)$,но полученные многочлены приводимы: $D = 9 - 4 = 5, 5^5 \equiv 3125 \equiv 1 ~mod ~11\Rightarrow$ имеют корни.\\
+Второй случай: $b = 1$, тогда $a^2 = 2$, но $2 ^{\frac{11 - 1}{2}} \equiv 32 \equiv -1 ~mod~ 11\Rightarrow$ не является квадратичным вычетов по модулю 11. Получаем, что такого разложение на неприводимые не существует, следовательно, многочлен $(x^4 + 1)$ неприводим.\\
+Ответ: неприводим.
+\textit{d}) $x^6+1\in \FF_{17}[x]$\\
+Имеет корень $4$: $4^6 + 1 \equiv 4097 \equiv 0~mod~11$, следовательно, приводим.\\
+Ответ: приводим.
+\end{enumerate}
+ \item \textbf{В зависимости от размера поля}
+\begin{enumerate}
+\item \textbf{Чему равна сумма всех элементов конечного поля?}
+Если поле состоит из $2$ элементов, то ,очевидно, $1$.\\
+Если больше, чем из $2$ элементов, то, так как $\FF^*$ - циклическая, пусть $a$ - порождающий, $\FF^{*} = (a^0, a^1...a^{p^n - 2})$, по формуле суммы геометрической прогрессии:$ S = a^0(a^{p^n - 1} -1)/(a - 1),$ а так как $a^{p^n - 1} - 1 = 0\Rightarrow S = 0.$
+\item \textbf{Чему равно произведение всех ненулевых элементов конечного поля?}\\
+Если поле состоит из $2$ элементов, очевидно, 1.\\
+Если поле содержит больше $2$ элементов: в поле все элементы без нуля имеют обратные, то есть элементы разбиваются на пары, причем, для всех элементов кроме $-1$ и $1$ эти элементы не совпадают. $\forall~a \neq -1, a \neq 1 \hookrightarrow a\cdot a^{-1} = 1\Rightarrow$ произведение равно $-1$.
+\end{enumerate}
+\item \textbf{Постройте изоморфизм между полями $GF(7)[x]/(x^2 + x - 1)$ и $GF(7)[x]/(x^2 + 1)$.}\\
+Надо найти образ $1 \text{ и образ } x.$ $\varphi(1) = 1$, так как это нейтральный элемент по умножению.\\
+Пусть $\varphi(x) = ax + b$. В первом поле $x^2 = - x + 1$, во втором $x^2 = -1$\\
+$\varphi(x^2) = a^2x^2 + 2ax + b^2 = 6a^2 + 2ax + b^2 = -ax - b + 1$\\
+\begin{cases}
+    a(2b + 1) & \equiv 0 \pmod{$7$} \\
+    6a^2 + b^2 & \equiv -b + 1\pmod{$7$} \\
+\end{cases}\\\newpage
+$a \neq 0 ~mod~7\Rightarrow 2b + 1\equiv 0 \Rightarrow b \equiv 3 ~mod~7 \\
+6a^2 \equiv -11 ~mod~7 \\
+a^2 \equiv 11 \equiv 4 ~mod~7 \Rightarrow a = 2$ или $a = -2$. Получаем, $\varphi(x) = 2x + 3$ или $\varphi(x) = -2x + 3$.\\
+Проверим сохранение операций: $ax+b, cx+d\text{ - какие-то элементы поля }GF(7)[x]/(x^2 + x - 1)\\
+\varphi (ax+b + cx+d) = 2(a+c)x + 3(a+c) + b + d = 2ax +3a+b + 2cx+ 3c+d = \varphi(ax+b)+\varphi(cx+d) \\
+\varphi((ax+b)(cx+d))= \varphi(acx^2 + (ad + bc) x +db) = \varphi (x(bc + ad -ac) + ac+ bd) = (2x+3)(dc+ad-ac) +ac+bd = -2ac -2acx + 2bcx +2adx+3ad+3bc+bd = 4acx^2 + 6acx + 2cbx + 6acx + 2ac + 3bc+2adx+3ad+bd = (2ax +3a+b)(2cx+3c+d) = \varphi(ax+b)\varphi(cx+d).$ Операции сохраняются.
+\item 
+\textbf{Постройте подгруппу размера 56 в $S_8$}\\
+Рассмотрим автоморфизм $\varphi: x \rightarrow ax + b$, $a \neq 0$, так как в этом случае не было бы взаимооднозначного соответствия, то есть это был бы не автоморфизм. Следовательно, $a$ может принимать 7 значений, $b$ - 8 значений, следовательно, так как автоморфизм однозначно задается образом $x$ - всего возможно 56 линейных автоморфизмов. Каждый автоморфизм переводит один элемент поля в другой, то есть кажды элемент является перестановкой. Линейные автоморфизмы образуют группу, следовательно построенное множество из 56 перестановок будет образовывать подгруппу.
+\item \begin{enumerate}
+    \item \textbf{Докажите, что любой автоморфизм -- это некоторая степень автоморфизма Фробениуса.}
+    
+    \item 
+    \textbf{Сколько элементов $F^k$ переводит в себя?}\\
+Пусть автоморфизм $F^k : a\hookrightarrow a^{p^k}$, для всех элементов, которые данный автоморфизм оставляет на месте будет верно:$a = a^{p^k}$, также $a = (a^{p^k})^{p^k} = a^{p^k\codt p^k} = a^{p^{2k}}$,(легко проверить, что элементы, остающиеся на месте без 0 образуют группу по умножению), то есть верно следующее:$ a = a^{p^{kx}}$, где $x\in \ZZ$. Обознаим $(k, n) = d,$ уравнение $kx = yn + d$ - имеет решения. $a = a^{p^{kx}} = a^{p^{xn +d}} = (a^{p^{xn}})^{p^{d}}$, а так как $\forall ~a\in \FF_{p^n} \hookrightarrow a = a^{p^n}$, получаем: $a = a^{p^d}\Rightarrow$ автоморфизм $F^k$ оставляет на месте элементы под поле $\FF_{p^d},$ где $d = (n,k).$
+\item\textbf{Сколько существует вложений $\FF_{p^n}$ в $\FF_{p^{kn}}$}\\
+Перефразируем задачу: необходимо найти количество инъективных гомоморфизмов данных полей. То есть вложение $G$ устанавливает изофорфизм между $\FF_{p^n}$ и $G(\FF_{p^n}$, необходимо найти количество таких вложений. Полю $\FF_{p^n}$ ставится в соответсвие изоморфное ему подполе в поле $F_{p^{nk}}$.\\ Рассмотрим автоморфизмы в поле $\FF_{p^n}$, каждый из них задает биекцию, то есть взаимооднозначное соответствие. Автоморфизмы образуют группу, мощность которой $n$, следовательно, так как любое вложение $\FF_{p^n}$ в $\FF_{p^{nk}}$ задает автоморфизм, следовательно таких вложений $n$.
+\end{enumerate}
+\item \textbf{Является ли неприводимым над полем $\FF_3$ из 3 элементов
+многочлен $x^9-x^3+1$?}\\
+Предположим, что многочлен неприводим, тогда $\FF_3/ (x^9 -x^3 +1)$ - поле. $(x^3 -x +1)\in \FF_3/ (x^9 -x^3 +1)$. $(x^3 - x + 1)^3 = (x^9 + (1 - x)^3 ) = (x^9 + 1 - x^3) = 0\Rightarrow$ в поле есть делители нуля, что противоречит определению поля. Получаем, что $(x^9 -x^3 +1)$ неприводим.
+\item \textbf{Сколько решений имеет уравнение $x^{22}-x^7=1$  
+в поле из 9 элементов?}\\
+Автоморфизм Фробениуса: $F: x\hookrightarrow x^3,$ применим автоморфизм Фробениуса:$(x^{66} - x^{21} - 1),x^8 = 1\Rightarrow x^2 - x^5 - 1$, снова применим автоморфизм Фробениуса:$x^6 - x^{15} - 1 = 0 \Leftrightarrow 1/x^2 - 1/x - 1 = 0 \Leftrightarrow 1 - x - x^2 = 0$ - данный многочлен имеет столько же корней сколько и $x^{22} - x^7 - 1$.Следовательно у него не более 2-х корней. Построем поля в явном виде: $\FF_9 \widetilde{=} \FF_3[x]/(x^2 + 1)$ (многочлен $x^2 + 1$ неприводим над $\FF_3$, так как не имеет корней).\\
+$x+1: [x+1] + [x+1]^2 - 1 = [x] + [1]+ [x^2 + 1] + [2x] - 1 = 0\Rightarrow $корень.\\
+$2x+1 : [2x+1] +[2x+]^2 - 1 = [2x] + [1] + [x] - [1] = 0\Rightarrow$ корень.\\
+Следовательно, уравнение имеет 2 кореня.\\
+Ответ: 2.
+\item 
+\textbf{Порядок элемента $a$ в поле $\FF_{25}$ равен 8. Является ли многочлен $-x^2+ax+a+a^2$ неприводимым?}\\
+Многочлен 2-ой степени неприводим, тогда и только тогда, когда не имеет корней. Посмотрим, имеет ли данный многочлен корни: $-x^2 + ax +a + a^2 = 0\\
+-x^2 + 6ax -9a^2 + a = 0$ (берем коэффиценты по модулю 5, поэтому можем так делать)\\
+$-(x - 3a)^2 + a = 0 \\
+a = (x - 3a)^2\Rightarrow$ если $x $ - корень многочлена, то а является квадратом какого-то элемента из поля. Но $ord(a) = 18, |F^*| = 24,$ если $a = b^2$, тогда существует такой элемент поля b, что $(b^2)^8 = 1\Rightarrow b^{16} = 1\Rightarrow$ это элементы порядка $1, 8$ или $4$(так как искомый порядок делит 16 и делит 24).\\
+$1$ не подходит, так как это порядок нейтрального элемента по умножению, то есть $1: a= 1\Rightarrow -x^2 + x + 1 + 1= -x^2 + x + 2$ - приводим, так как имеет корень 2.\\
+$4$: $a = b^2, a^2 = 1,$ но порядок a равен 8, противоречие.\\
+$8 : a = b^2\Rightarrow a^4 = 1$, снова получаем противоречие определению порядка элемента.\\
+Следовательно, многочлен неприводим.
+\\
+Ответ: неприводим.
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
